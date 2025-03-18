@@ -12,7 +12,7 @@ using namespace std;
 using namespace mimir;
 using namespace mimir::validation;
 
-#define LIVE make_float4(0.41f, 0.145f, 0.8f, 1.0f)
+#define LIVE make_float4(1.0f, 1.0f, 1.0f, 1.0f)
 #define DEAD make_float4(0.0f, 0.0f, 0.0f, 0.0f)
 
 /**
@@ -35,7 +35,7 @@ __global__ void fillMatrix(float4 *matrix, int n, int seed) {
         } else {
             curandState state;
             curand_init(seed, index, 0, &state);
-            matrix[index] = (curand_uniform(&state) < 0.50) ? DEAD : LIVE;
+            matrix[index] = (curand_uniform(&state) < 0.5f) ? DEAD : LIVE;
         }
     }
 }
@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
     live_view_params.view_type = ViewType::Voxels;
     live_view_params.attributes[AttributeType::Color] = *live_buffer;
     live_view_params.options.default_color = LIVE;
-    live_view_params.options.default_size = 50;
+    live_view_params.options.default_size = (1000/n);
 
     engine.createView(live_view_params);
 
@@ -171,4 +171,5 @@ int main(int argc, char **argv) {
 
     return 0;
 }
+
 

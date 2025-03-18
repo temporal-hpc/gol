@@ -58,7 +58,7 @@ message(STATUS "Usando shaders de Mimir desde: ${SHADERS_SOURCE_DIR}")
 add_custom_target(copy_shaders ALL
   COMMAND ${CMAKE_COMMAND} -E copy_directory
           ${SHADERS_SOURCE_DIR}/shaders
-          ${PROJECT_BINARY_DIR}/samples/shaders/
+          ${PROJECT_BINARY_DIR}/executables/shaders/
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
   COMMENT "Copiando shaders de Mimir..."
   VERBATIM
